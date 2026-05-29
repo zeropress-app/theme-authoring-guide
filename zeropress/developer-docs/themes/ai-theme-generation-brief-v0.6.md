@@ -187,6 +187,13 @@ Every template may use:
 
 `menus`, `widgets`, and `collections` are optional maps. Guard custom iterations with `{{#if ...items}}`.
 
+Menu items must be real navigation links. Do not invent placeholder menu items,
+do not use `url: "#"`, do not use same-page placeholder hashes such as
+`url: "#section"`, and do not add links for pages that are not present in the
+provided content. A hash is allowed only as part of a real path, such as
+`/deployment/#github-pages`, when that page exists. If a future page is not
+available, leave it out of the menu.
+
 Use named collections for intentional editorial groups such as cover stories, hero rails, portfolio highlights, landing feature groups, and docs quick links. If `theme.json.collection_slots` declares a collection id, use the matching `collections.<id>.items[]` path in templates:
 
 ```html

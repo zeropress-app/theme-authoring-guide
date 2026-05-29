@@ -304,6 +304,12 @@ Menu items may provide scalar `meta` values for custom navigation UI. Use manual
 
 Menu `meta` is not a raw HTML channel. Values are escaped through normal template rendering.
 
+Menu items should point to real navigation targets. Do not add dummy menu items
+with `url: "#"`, `url: "#section"`, or links for pages that do not exist yet.
+A hash is valid only when it is attached to a real path, such as
+`/deployment/#github-pages`, and the target page exists. If a page is not ready,
+omit the item from the menu or create a real stub page for the planned URL.
+
 Named collections follow the same template access pattern for curated content groups. A theme may declare optional `collection_slots` in `theme.json`, and preview-data may provide matching `collections.<id>.items[]`. Use collection slots for hand-picked editorial areas such as magazine cover stories, hero rails, portfolio highlights, landing page feature groups, and docs quick links. Missing collections are optional data and should render as empty:
 
 ```html
