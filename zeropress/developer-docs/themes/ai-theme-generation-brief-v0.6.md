@@ -439,6 +439,12 @@ For page/post-only integrations, use explicit branches because v0.6 has no logic
 
 Core content should remain usable without JavaScript. Use client scripts only for progressive enhancement such as search, Mermaid rendering, code-copy buttons, dark mode toggles, comments, and optional TOC active states.
 
+When implementing ZeroPress search UI, use the documented hook convention:
+`data-zp-search`, `data-zp-search-input`, `data-zp-search-submit`,
+`data-zp-search-status`, and `data-zp-search-results`. These hooks are for
+theme JavaScript. ZeroPress does not automatically attach UI behavior to them.
+Do not invent unrelated search hook names when these fit.
+
 ## Common Failure Points
 
 - Missing `assets/style.css`

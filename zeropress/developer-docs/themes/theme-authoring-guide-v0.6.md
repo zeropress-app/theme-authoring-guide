@@ -883,6 +883,20 @@ const result = await searchApi.search("query", { limit: 10 });
 
 Themes should provide the form, result list, empty state, keyboard behavior, and dialog behavior. The search adapter provides loading, tokenization, scoring, and a Pagefind-like result shape.
 
+Use the following hook names when wiring theme-owned search UI. These are
+conventions for theme JavaScript, not automatic ZeroPress UI behavior:
+
+```html
+{{#if site.search}}
+  <form role="search" data-zp-search>
+    <input type="search" data-zp-search-input>
+    <button type="submit" data-zp-search-submit>Search</button>
+    <p data-zp-search-status></p>
+    <div data-zp-search-results></div>
+  </form>
+{{/if}}
+```
+
 Mark the actual searchable post/page body with `data-pagefind-body` so Pagefind post-build indexing does not accidentally include archives, tag pages, or 404 pages:
 
 ```html
