@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json",
+  "name": "Minimal 2",
+  "namespace": "zeropress",
+  "slug": "theme-minimal2",
+  "version": "0.6.0",
+  "license": "MIT",
+  "runtime": "0.6",
+  "description": "Quiet, content-first blog theme. Pure CSS prefers-color-scheme dark mode, serif body / sans headings, lightweight comments island.",
+  "features": {
+    "comments": true,
+    "post_index": true
+  },
+  "menu_slots": {
+    "primary": {
+      "title": "Primary Menu",
+      "description": "Header navigation"
+    },
+    "footer": {
+      "title": "Footer Menu",
+      "description": "Compact footer links"
+    }
+  }
+}
