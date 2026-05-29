@@ -1,0 +1,27 @@
+{
+  "name": "zeropress-theme-guide",
+  "private": true,
+  "version": "0.6.4",
+  "description": "Direct migration from React sites using AI-assisted tools",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "build:minimal": "rm -rf ./zp_dist && zeropress-build ./templates/minimal/theme --data ./templates/minimal/preview-data.json --out ./zp_dist",
+    "build:blog": "rm -rf ./zp_dist && zeropress-build ./templates/blog/theme --data ./templates/blog/preview-data.json --out ./zp_dist",
+    "build:docs": "rm -rf ./zp_dist && zeropress-build ./templates/docs/theme --data ./templates/docs/preview-data.json --out ./zp_dist",
+    "build:magazine": "rm -rf ./zp_dist && zeropress-build ./templates/magazine/theme --data ./templates/magazine/preview-data.json --out ./zp_dist",
+    "build:portfolio": "rm -rf ./zp_dist && zeropress-build ./templates/portfolio/theme --data ./templates/portfolio/preview-data.json --out ./zp_dist",
+    "dev:minimal": "zeropress-theme dev ./templates/minimal/theme --data ./templates/minimal/preview-data.json --port 8080",
+    "dev:blog": "zeropress-theme dev ./templates/blog/theme --data ./templates/blog/preview-data.json --port 8080",
+    "dev:docs": "zeropress-theme dev ./templates/docs/theme --data ./templates/docs/preview-data.json --port 8080",
+    "dev:magazine": "zeropress-theme dev ./templates/magazine/theme --data ./templates/magazine/preview-data.json --port 8080",
+    "dev:portfolio": "zeropress-theme dev ./templates/portfolio/theme --data ./templates/portfolio/preview-data.json --port 8080"
+  },
+  "dependencies": {
+    "@zeropress/build": "0.6.4",
+    "@zeropress/theme": "0.6.4"
+  }
+}
