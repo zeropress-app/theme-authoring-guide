@@ -199,25 +199,25 @@ Render a block when a path matches a typed comparison condition.
 ```html
 {{#if_eq widget.type "profile"}}
   ...
-{{/if_eq}}
+{{/if}}
 
 {{#if_eq loop.index 4}}
   ...
-{{/if_eq}}
+{{/if}}
 
 {{#if_eq route.url item.url}}
   aria-current="page"
-{{/if_eq}}
+{{/if}}
 
-{{#if_neq loop.last true}}, {{/if_neq}}
+{{#if_neq loop.last true}}, {{/if}}
 
 {{#if_in route.type "post" "page" "front_page"}}
   {{partial:content-enhancements}}
-{{/if_in}}
+{{/if}}
 
 {{#if_starts_with route.url item.url}}
   is-active
-{{/if_starts_with}}
+{{/if}}
 ```
 
 With fallback:
@@ -227,20 +227,20 @@ With fallback:
   ...
 {{#else}}
   ...
-{{/if_eq}}
-{{#if_eq widget.type "profile"}}
-  ...
-{{#else_if_eq widget.type "search"}}
-  ...
-{{/if_eq}}
+{{/if}}
+{{#if_eq route.url item.url}}
+  is-active
+{{#else_if_starts_with route.url item.url}}
+  is-parent
+{{/if}}
 
 {{#if_in route.type "tag"}}
   Tag
-{{#else_if_in route.type "post" "page"}}
+{{#else_if_eq route.type "post"}}
   Content
 {{#else}}
   Other
-{{/if_in}}
+{{/if}}
 ```
 
 Rules:
@@ -251,6 +251,9 @@ Rules:
 - right-hand operands may be string, number, boolean, or `null` literals, or variable paths
 - comparisons are strict and do not coerce types
 - `if_starts_with` matches only when both resolved values are strings
+- comparison helper branches may be mixed inside one conditional block
+- close comparison helper blocks with `{{/if}}`
+- concrete close tags such as `{{/if_eq}}` are accepted in v0.6 for compatibility, but are planned for removal in v0.7
 
 Typed literals:
 
@@ -308,7 +311,7 @@ Example:
 
 ```html
 {{#for tag in post.tags}}
-  <a href="{{tag.url}}">{{tag.name}}</a>{{#if_neq loop.last true}}<span>, </span>{{/if_neq}}
+  <a href="{{tag.url}}">{{tag.name}}</a>{{#if_neq loop.last true}}<span>, </span>{{/if}}
 {{/for}}
 ```
 
@@ -468,7 +471,7 @@ for post-specific branching outside `post.html`, compare `route.type`:
 ```html
 {{#if_eq route.type "post"}}
   ...
-{{/if_eq}}
+{{/if}}
 ```
 
 Page templates can also branch on front-page renders. This is useful when the front page is backed by Markdown and the Markdown body already contains the visible H1:

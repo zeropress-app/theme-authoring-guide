@@ -143,7 +143,7 @@ Use only v0.6 template syntax:
 ```html
 {{path}}
 {{#if path}}...{{#else_if other.path}}...{{#else}}...{{/if}}
-{{#if_eq path "literal"}}...{{#else_if_eq path "other"}}...{{/if_eq}}
+{{#if_eq route.url item.url}}...{{#else_if_starts_with route.url item.url}}...{{#else}}...{{/if}}
 {{#for item in path}}...{{/for}}
 {{partial:name}}
 {{partial:name variant="compact" show_excerpt=true}}
@@ -153,11 +153,15 @@ Do not use:
 
 - JavaScript expressions inside templates
 - `&&`, `||`, arithmetic, `.length`, or comparisons such as `> 0`
-- `unless`, `if_neq`, custom helpers, or `for ... else`
+- `unless`, custom helpers, or `for ... else`
 - Vue/React directives such as `v-if`, `v-for`, or JSX
 
-`if_eq` is strict and compares the left path to a string literal without type
-coercion. `loop.index` is a zero-based number, so
+Close conditional blocks with `{{/if}}`. Comparison `else_if` helpers may be
+mixed inside one comparison block. Concrete closes such as `{{/if_eq}}` are
+accepted in v0.6, but are planned for removal in v0.7.
+
+Comparison helpers are strict and do not coerce typed literals or path values.
+`loop.index` is a zero-based number, so
 `{{#if_eq loop.index "4"}}` does not match. For positional styling, prefer
 `loop.first`, `loop.last`, CSS `:nth-child()`, or data prepared before
 rendering.
@@ -277,7 +281,7 @@ There is no `route.is_post` shortcut. For post-specific branching outside
 ```html
 {{#if_eq route.type "post"}}
   ...
-{{/if_eq}}
+{{/if}}
 ```
 
 Render pagination only when it is enabled:

@@ -222,12 +222,12 @@ Supported `v0.6` syntax:
 ```html
 {{#if path}}...{{#else}}...{{/if}}
 {{#if path}}...{{#else_if other.path}}...{{#else}}...{{/if}}
-{{#if_eq path "literal"}}...{{#else}}...{{/if_eq}}
-{{#if_eq loop.index 4}}...{{/if_eq}}
-{{#if_eq route.url item.url}}...{{/if_eq}}
-{{#if_neq loop.last true}}, {{/if_neq}}
-{{#if_in route.type "post" "page" "front_page"}}...{{/if_in}}
-{{#if_starts_with route.url item.url}}...{{/if_starts_with}}
+{{#if_eq path "literal"}}...{{#else}}...{{/if}}
+{{#if_eq loop.index 4}}...{{/if}}
+{{#if_eq route.url item.url}}...{{#else_if_starts_with route.url item.url}}...{{/if}}
+{{#if_neq loop.last true}}, {{/if}}
+{{#if_in route.type "post" "page" "front_page"}}...{{/if}}
+{{#if_starts_with route.url item.url}}...{{/if}}
 {{#for item in path}}...{{/for}}
 {{loop.index}}
 {{partial:sidebar-widgets}}
@@ -260,6 +260,10 @@ Comparison helpers are strict and do not coerce types. `{{#if_eq loop.index 4}}`
 can match the fifth item, but `{{#if_eq loop.index "4"}}` does not. Use `if`
 for truthiness checks, `if_eq`/`if_neq` for exact comparisons, `if_in` for
 small allowed sets, and `if_starts_with` for simple prefix checks.
+Comparison helper branches may be mixed inside one conditional block. Close
+comparison helper blocks with `{{/if}}`. Concrete close tags such as
+`{{/if_eq}}` are accepted in v0.6 for compatibility, but are planned for
+removal in v0.7.
 
 ### Menu Slot IDs And Dot Paths
 
@@ -902,7 +906,7 @@ Mark the actual searchable post/page body with `data-pagefind-body` so Pagefind 
 ```html
 <div
   class="prose"
-  {{#if site.search}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}
+  {{#if site.search}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if}}{{/if}}
 >
   {{page.html}}
 </div>
@@ -1167,7 +1171,7 @@ For page/post-only enhancement, use `if_in` when multiple route types share the 
 ```html
 {{#if_in route.type "post" "page"}}
   {{partial:mermaid-loader}}
-{{/if_in}}
+{{/if}}
 ```
 
 cdnjs Mermaid example:
