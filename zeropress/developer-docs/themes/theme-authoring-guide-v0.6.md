@@ -795,10 +795,20 @@ Pages currently use the rendered HTML field:
 
 - `page.title`
 - `page.html`
+- `page.updated_at`
+- `page.updated_at_iso`
 - `page.meta`
 - `page.toc[]`
 
 For Markdown-first document pages, `page.html` is the rendered Markdown body. If the source Markdown starts with `# Title`, then `page.html` already contains that H1. In that case, do not render an additional `<h1>{{page.title}}</h1>` in `page.html`; let the Markdown body provide the document heading.
+
+Page update timestamps are optional. Build Pages can derive them from Git history, and direct preview-data authors may provide `page.updated_at_iso`. When present, ZeroPress formats `page.updated_at` using the site locale, timezone, date style, and time style:
+
+```html
+{{#if page.updated_at_iso}}
+  <time datetime="{{page.updated_at_iso}}" data-zp-local-date>{{page.updated_at}}</time>
+{{/if}}
+```
 
 This pattern avoids duplicate page headings:
 
