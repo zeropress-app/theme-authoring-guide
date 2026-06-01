@@ -211,12 +211,18 @@ Use named collections for intentional editorial groups such as cover stories, he
 For docs-style detail pagination, prefer the generic cursor alias unless the design needs a specific collection id:
 
 ```html
+{{#if page.collection_cursor.collection_title}}
+  <p class="eyebrow">{{page.collection_cursor.collection_title}}</p>
+{{/if}}
+
 {{#if page.collection_cursor.next}}
   <a href="{{page.collection_cursor.next.url}}">{{page.collection_cursor.next.title}}</a>
 {{/if}}
 ```
 
 `page.collection_cursor` and `post.collection_cursor` point to the first matching collection cursor in preview-data collection order. If the same page or post belongs to multiple collections, use `page.collection_cursors.<id>` or `post.collection_cursors.<id>` to choose a specific collection.
+
+Cursor objects include `collection_id`, `collection_title`, `index`, `position`, `count`, `first`, `last`, `prev`, and `next`. Use `collection_title` for group labels or eyebrow text; use `prev` and `next` for collection-bounded pagination.
 
 Use first-class site fields before inventing theme-specific keys. For site logos,
 prefer `site.logo.src` and `site.logo.alt` instead of ad hoc values such as

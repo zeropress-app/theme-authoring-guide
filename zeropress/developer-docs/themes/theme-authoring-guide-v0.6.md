@@ -370,6 +370,10 @@ Matching preview-data can then provide those groups explicitly:
 Detail routes can use build-derived collection cursors for previous/next navigation. The generic alias is enough for most docs-style templates:
 
 ```html
+{{#if page.collection_cursor.collection_title}}
+  <p class="eyebrow">{{page.collection_cursor.collection_title}}</p>
+{{/if}}
+
 {{#if page.collection_cursor.prev}}
   <a href="{{page.collection_cursor.prev.url}}">
     Previous: {{page.collection_cursor.prev.title}}
@@ -384,6 +388,22 @@ Detail routes can use build-derived collection cursors for previous/next navigat
 ```
 
 `page.collection_cursor` and `post.collection_cursor` point to the first matching collection cursor in preview-data collection order. If the same page or post belongs to multiple collections, all matching cursors remain available under `page.collection_cursors.<id>` or `post.collection_cursors.<id>`:
+
+Cursor objects include collection metadata and route position:
+
+```txt
+collection_cursor.collection_id
+collection_cursor.collection_title
+collection_cursor.index
+collection_cursor.position
+collection_cursor.count
+collection_cursor.first
+collection_cursor.last
+collection_cursor.prev
+collection_cursor.next
+```
+
+Use `collection_title` for group labels or eyebrow text. Keep the document H1 in the Markdown body or route title; the collection title is contextual navigation metadata, not a replacement page title.
 
 ```html
 {{#if page.collection_cursors.work.next}}
