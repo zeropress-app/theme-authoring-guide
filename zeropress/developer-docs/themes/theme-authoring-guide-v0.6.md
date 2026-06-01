@@ -574,7 +574,7 @@ The `url` field follows the active permalink policy. Declared categories and tag
 - `site.footer.copyright_text`: footer copyright or legal text. ZeroPress does not add a copyright symbol automatically.
 - `site.footer.attribution`: normalized by build as `true` unless preview-data explicitly sets it to `false`.
 
-Reusable themes should render footer legal text from `site.footer.copyright_text` when present and fall back to `site.title` when it is missing. ZeroPress attribution such as `Published with ZeroPress.` should be treated as theme UI that can be hidden by `site.footer.attribution: false`.
+Reusable themes should render footer legal text from `site.footer.copyright_text` when present and fall back to `site.title` when it is missing. ZeroPress attribution such as `Published with ZeroPress` should be treated as theme UI that can be hidden by `site.footer.attribution: false`.
 
 Footer example:
 
@@ -587,7 +587,7 @@ Footer example:
   {{/if}}
 
   {{#if site.footer.attribution}}
-    <p>Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a>.</p>
+    <p>Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a></p>
   {{/if}}
 </footer>
 ```
@@ -1228,7 +1228,7 @@ Preview data may provide `site.footer.copyright_text` and `site.footer.attributi
 - Treat `page.meta.source_markdown_url` as optional. Only render source Markdown links inside `{{#if page.meta.source_markdown_url}}`.
 - Keep product-specific copy out of reusable themes. Prefer `{{site.title}}`, `{{site.description}}`, `{{site.footer.copyright_text}}`, menus, and build-provided URLs over hard-coded demo names.
 - Do not hard-code generator meta tags in themes. Generator metadata is controlled by `site.expose_generator`.
-- Treat ZeroPress attribution as optional theme UI. If a theme includes `Published with ZeroPress.`, hide it when `site.footer.attribution` is `false`.
+- Treat ZeroPress attribution as optional theme UI. If a theme includes `Published with ZeroPress`, hide it when `site.footer.attribution` is `false`.
 - Do not assume comparison helpers coerce values. `loop.index` is numeric, so use `{{#if_eq loop.index 4}}` rather than `{{#if_eq loop.index "4"}}`.
 - Do not use `if_eq` as a truthiness check. Use `{{#if site.footer.attribution}}`, not `{{#if_eq site.footer.attribution}}`.
 - Keep reusable theme images/icons in `theme/assets/`, but keep site content media and vendor bundles in `public/`.

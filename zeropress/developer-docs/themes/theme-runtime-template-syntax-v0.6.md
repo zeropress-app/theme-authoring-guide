@@ -498,7 +498,7 @@ Footer UI should use site-provided footer display data when available:
   {{/if}}
 
   {{#if site.footer.attribution}}
-    <p>Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a>.</p>
+    <p>Published with <a href="https://zeropress.app" target="_blank" rel="noreferrer noopener">ZeroPress</a></p>
   {{/if}}
 </footer>
 ```
