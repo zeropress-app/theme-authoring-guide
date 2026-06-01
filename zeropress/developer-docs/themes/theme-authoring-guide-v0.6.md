@@ -314,7 +314,7 @@ A hash is valid only when it is attached to a real path, such as
 `/deployment/#github-pages`, and the target page exists. If a page is not ready,
 omit the item from the menu or create a real stub page for the planned URL.
 
-Named collections follow the same template access pattern for curated content groups. A theme may declare optional `collection_slots` in `theme.json`, and preview-data may provide matching `collections.<id>.items[]`. Use collection slots for hand-picked editorial areas such as magazine cover stories, hero rails, portfolio highlights, landing page feature groups, and docs quick links. Missing collections are optional data and should render as empty:
+Named collections follow the same template access pattern for curated content groups. A theme may declare optional `collection_slots` in `theme.json`, and preview-data may provide matching `collections.<id>.items[]`. Use collection slots for hand-picked editorial areas such as magazine cover stories, hero rails, portfolio highlights, landing page feature groups, and docs quick links when the theme directly reads named paths such as `collections.hero-rail.items`. Missing collections are optional data and should render as empty:
 
 ```html
 {{#if collections.hero-rail.items}}
@@ -326,7 +326,7 @@ Named collections follow the same template access pattern for curated content gr
 {{/if}}
 ```
 
-Declare the expected collection ids in `theme.json` so site authors, admin tools, and AI theme generators can discover the intended content slots:
+Declare the expected collection ids in `theme.json` only when the theme directly references those named collection ids. This helps site authors, admin tools, and AI theme generators discover the intended content slots:
 
 ```json
 {
@@ -346,6 +346,8 @@ Declare the expected collection ids in `theme.json` so site authors, admin tools
   }
 }
 ```
+
+Do not declare site-specific collection slots when the theme only uses generic route cursors such as `page.collection_cursor` or `post.collection_cursor`. Generic cursor themes, including documentation themes, should let each site choose any collection ids.
 
 Matching preview-data can then provide those groups explicitly:
 
