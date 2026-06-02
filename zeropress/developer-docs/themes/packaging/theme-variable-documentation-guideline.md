@@ -55,16 +55,15 @@ Theme authors should follow these rules when exposing customizable variables.
 - Keep variable names stable once published.
 - Use variables for colors, spacing, typography, borders, and layout tuning.
 - Avoid documenting internal-only variables that may change frequently.
-- Prefer a consistent prefix such as `--zp-...` or a theme-specific prefix.
 - Keep override points small and intentional instead of exposing every internal token.
 
-Recommended variable groups:
+Common variable groups:
 
-- `--zp-color-*`
-- `--zp-font-*`
-- `--zp-space-*`
-- `--zp-layout-*`
-- `--zp-border-*`
+- color variables
+- font variables
+- spacing variables
+- layout variables
+- border variables
 
 ## Required Documentation Sections
 
@@ -89,8 +88,8 @@ Example:
 
 ```css
 :root {
-  --zp-color-bg: #f7f3ec;
-  --zp-color-text: #2c241f;
+  --color-bg: #f7f3ec;
+  --color-text: #2c241f;
 }
 ```
 
@@ -110,10 +109,10 @@ Recommended table format:
 
 | Variable | Purpose | Expected Value | Default | Notes |
 | --- | --- | --- | --- | --- |
-| `--zp-color-bg` | Page background color | CSS color | `#f7f3ec` | Applied to site background |
-| `--zp-color-text` | Main body text color | CSS color | `#2c241f` | Should maintain readable contrast |
-| `--zp-font-body` | Body text font family | CSS `font-family` value | `"Iowan Old Style", Georgia, serif` | Fallback stack should be preserved |
-| `--zp-layout-content-width` | Main content width | CSS length | `44rem` | Affects reading width |
+| `--color-bg` | Page background color | CSS color | `#f7f3ec` | Applied to site background |
+| `--color-text` | Main body text color | CSS color | `#2c241f` | Should maintain readable contrast |
+| `--font-body` | Body text font family | CSS `font-family` value | `"Iowan Old Style", Georgia, serif` | Fallback stack should be preserved |
+| `--layout-content-width` | Main content width | CSS length | `44rem` | Affects reading width |
 
 ## Examples
 
@@ -130,10 +129,10 @@ Example:
 
 ```css
 :root {
-  --zp-color-bg: #fcfaf6;
-  --zp-color-text: #2d241d;
-  --zp-color-accent: #8b5a3c;
-  --zp-layout-content-width: 46rem;
+  --color-bg: #fcfaf6;
+  --color-text: #2d241d;
+  --color-accent: #8b5a3c;
+  --layout-content-width: 46rem;
 }
 ```
 
@@ -173,17 +172,17 @@ Apply overrides in `Design > Custom CSS`.
 
 | Variable | Purpose | Expected Value | Default |
 | --- | --- | --- | --- |
-| `--zp-color-bg` | Site background color | CSS color | `#f7f3ec` |
-| `--zp-color-text` | Body text color | CSS color | `#2c241f` |
-| `--zp-font-body` | Body font stack | CSS font-family | `"Iowan Old Style", Georgia, serif` |
+| `--color-bg` | Site background color | CSS color | `#f7f3ec` |
+| `--color-text` | Body text color | CSS color | `#2c241f` |
+| `--font-body` | Body font stack | CSS font-family | `"Iowan Old Style", Georgia, serif` |
 
 ## Example
 
 ```css
 :root {
-  --zp-color-bg: #fffdf8;
-  --zp-color-text: #2a211b;
-  --zp-font-body: "Cormorant Garamond", Georgia, serif;
+  --color-bg: #fffdf8;
+  --color-text: #2a211b;
+  --font-body: "Cormorant Garamond", Georgia, serif;
 }
 ```
 ````
