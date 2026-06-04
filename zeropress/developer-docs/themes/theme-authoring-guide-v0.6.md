@@ -896,6 +896,11 @@ Static search remains theme-owned UI on top of build-generated search artifacts.
 
 Set `features.search: true` when the theme includes static search UI. Omitted `features.search` behaves like `false`, so themes without search UI do not need to declare anything.
 
+Native search is enabled only when both conditions are true:
+
+- preview-data does not set `site.search: false`
+- the active theme declares `features.search: true`
+
 Wrap visible search UI with `site.search`; build-core exposes this as the effective value after combining theme capability and site preference:
 
 ```html
