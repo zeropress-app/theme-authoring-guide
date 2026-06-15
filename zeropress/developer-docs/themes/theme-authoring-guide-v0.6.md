@@ -1095,9 +1095,14 @@ Markdown rendering also includes common authoring conventions that themes may st
 - `~~deleted~~` renders as `<s>deleted</s>`.
 - Task lists render disabled checkbox inputs and use `contains-task-list`, `task-list-item`, and `task-list-item-checkbox` classes.
 - GitHub alert blockquotes such as `> [!NOTE]` render as `<aside class="zp-alert zp-alert--note" role="note">` with a `zp-alert__title` title paragraph.
+- Docusaurus-style admonition containers such as `:::tip` render as the same `zp-alert` aside structure.
 - Fenced code blocks are highlighted by build-core with `highlight.js`. The `<code>` element keeps the `language-*` class, and highlighted tokens use `hljs-*` span classes.
 
 Supported alert markers are `NOTE`, `TIP`, `IMPORTANT`, `WARNING`, and `CAUTION`.
+
+For GitHub and IDE Markdown compatibility, prefer GitHub-style alert blockquotes. Docusaurus-style containers are supported for documentation ports. Supported container types are `note`, `info`, `tip`, `important`, `warning`, `caution`, and `danger`. `info` uses `zp-alert--note`, and `danger` uses `zp-alert--caution`. Custom container titles and attributes are ignored, and MDX components are not supported.
+
+Raw HTML tables may include positive integer `rowspan` and `colspan` attributes on `th` and `td`. Cell `align` attributes are converted to `zp-align-*` classes, so table styling should cover `zp-align-left`, `zp-align-center`, and `zp-align-right`. Inline `b`, `sup`, and `sub` tags are preserved for compatibility with existing documentation tables.
 
 Themes should style the generated code markup in CSS. A client-side `highlight.js` script is usually not needed for Markdown rendered by ZeroPress:
 
@@ -1133,7 +1138,9 @@ Themes should style the generated code markup in CSS. A client-side `highlight.j
 
 Mermaid is the exception: ZeroPress preserves Mermaid fences as readable code blocks at build time. Themes can progressively enhance `pre code.language-mermaid` on the client when they want diagrams.
 
-Markdown documents may include a conservative subset of raw HTML. ZeroPress preserves safe semantic media markup such as `figure`, `figcaption`, `picture`, and `source`, plus responsive image attributes such as `img srcset`, `sizes`, `loading`, and `decoding`. Unsupported tags, inline `style`, event handler attributes, scripts, and unsafe URLs are removed by the sanitizer.
+Markdown documents may include a conservative subset of raw HTML. ZeroPress preserves safe semantic media markup such as `figure`, `figcaption`, `picture`, `source`, `video`, `audio`, and `track`, plus responsive image attributes such as `img srcset`, `sizes`, `loading`, and `decoding`. Native media attributes such as `controls`, `poster`, `preload`, `playsinline`, and caption `track` metadata are allowed. Unsupported tags, inline `style`, event handler attributes, scripts, and unsafe URLs are removed by the sanitizer.
+
+Raw HTML links in Markdown may preserve `target="_blank"`. Other `target` values are removed. When `_blank` is preserved, ZeroPress forces `rel` to include `noopener noreferrer`. Existing safe `rel` tokens are preserved; unknown tokens are removed. Safe `rel` tokens are `noopener`, `noreferrer`, `nofollow`, `ugc`, `sponsored`, and `external`.
 
 ```html
 <figure class="gallery-item">
