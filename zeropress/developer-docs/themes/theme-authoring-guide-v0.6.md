@@ -168,7 +168,7 @@ Current capability fields:
 | Feature | Omitted behavior | Meaning |
 | --- | --- | --- |
 | `comments` | `false` | Comments UI/API mounting is opt-in. |
-| `newsletter` | No core build behavior | Capability metadata only until a stronger newsletter contract exists. |
+| `newsletter` | `false` | Newsletter CTA/island UI support is opt-in. ZeroPress does not implement provider submit behavior. |
 | `post_index` | `true` | Themes are assumed to support the post index unless they opt out. |
 | `search` | `false` | Static search UI/artifact support is opt-in. |
 
@@ -1269,15 +1269,31 @@ Preview data may provide `site.footer.copyright_text` and `site.footer.attributi
 
 ## Newsletter
 
-`features.newsletter` is supported as a capability flag.
+`features.newsletter` is supported as a capability flag for newsletter CTA/island UI.
 
-Current `theme-blog` keeps newsletter as markup-only UI:
+Preview data may provide optional `site.newsletter` data:
 
-- static form shell
-- no storage
-- no third-party integration requirement
+```json
+{
+  "enabled": true,
+  "title": "Subscribe",
+  "description": "Get updates by email.",
+  "button_label": "Subscribe",
+  "signup_url": "https://example.com/newsletter",
+  "embed_url": "/newsletter.html"
+}
+```
 
-This is the recommended default until ZeroPress defines a stronger newsletter contract.
+Recommended theme behavior:
+
+- `signup_url` and `embed_url`: JavaScript may open a modal iframe; no-JS fallback links to `signup_url`.
+- `signup_url` only: render a normal link or CTA.
+- `embed_url` only: render iframe/modal UI only when JavaScript is available; hide without JavaScript.
+- missing, disabled, or `enabled: false`: hide the newsletter UI.
+
+Do not implement provider submit logic in reusable themes. ZeroPress does not own subscription storage, provider API calls, provider-specific tokens, or subscribe state. Markdown body sanitization does not open arbitrary newsletter form/input handling; use trusted iframe HTML, external signup links, custom HTML slots, or theme-owned progressive enhancement islands.
+
+Build Pages config does not expose `site.newsletter`; Build Pages sites should handle newsletter UI through public HTML, custom HTML, or theme-specific markup instead of config.
 
 ## Reference Theme
 

@@ -258,9 +258,11 @@ use actual boolean `false` when a feature should be off.
 `theme.json.features` is optional. Missing feature flags use per-feature defaults:
 
 - `comments`: `false`
-- `newsletter`: no core build behavior
+- `newsletter`: `false`; add `true` only when the theme supports newsletter CTA/island UI
 - `post_index`: `true`
 - `search`: `false`
+
+If `features.newsletter` is true, use optional `site.newsletter` data only as CTA/island input. Do not implement provider submit logic, provider token handling, subscription storage, or provider-specific API calls. Preferred behavior is external signup links or trusted iframe/modal progressive enhancement; if only `embed_url` exists, hide the UI when JavaScript is unavailable. Build Pages config does not expose `site.newsletter`.
 
 Current `route.type` values include:
 
@@ -471,6 +473,7 @@ Do not invent unrelated search hook names when these fit.
 - Reading `page.toc` in `post.html`, or `post.toc` in `page.html`, without handling both contexts
 - Hard-coding demo/product copy in reusable themes
 - Assuming `site.footer`, `site.meta`, `page.meta`, menus, widgets, collections, comments, or newsletter data always exists
+- Implementing newsletter provider submit logic inside a reusable theme
 - Using unsupported template expressions such as `{{#if items.length}}`
 - Assuming `if_eq` coerces numbers, such as `{{#if_eq loop.index "4"}}`
 - Putting site-specific content media or vendor packages in reusable `theme/assets/` instead of `public/`
