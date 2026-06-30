@@ -308,6 +308,12 @@ Menu items may provide scalar `meta` values for custom navigation UI. Use manual
 
 Menu `meta` is not a raw HTML channel. Values are escaped through normal template rendering.
 
+Menu item `type` is optional origin metadata (`custom`, `page`, `post`, or
+`category`). It is accepted in v0.6 for compatibility, but is planned for
+removal in v0.7. Themes should render navigation from `item.title`,
+`item.url`, `item.target`, `item.meta`, and `item.children`, and should not
+require `item.type`.
+
 Menu items should point to real navigation targets. Do not add dummy menu items
 with `url: "#"`, `url: "#section"`, or links for pages that do not exist yet.
 A hash is valid only when it is attached to a real path, such as

@@ -200,6 +200,10 @@ provided content. A hash is allowed only as part of a real path, such as
 `/deployment/#github-pages`, when that page exists. If a future page is not
 available, leave it out of the menu.
 
+Do not require menu item `type`. It is optional origin metadata accepted in
+v0.6 for compatibility, but planned for removal in v0.7. Render menu links from
+`title`, `url`, `target`, `meta`, and `children`.
+
 Use named collections for intentional editorial groups such as cover stories, hero rails, portfolio highlights, landing feature groups, and docs quick links. Declare `theme.json.collection_slots` only when the theme directly references named collection paths. If `theme.json.collection_slots` declares a collection id, use the matching `collections.<id>.items[]` path in templates:
 
 ```html
